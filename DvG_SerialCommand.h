@@ -12,7 +12,7 @@ It doesn't matter if the command is ASCII or binary encoded.
 will return true when a new command is ready to be processed. Subsequently, the
 command string can be retrieved by calling 'getCmd()'.
 
-Dennis van Gils, 14-08-2018
+Dennis van Gils, 11-03-2020
 */
 
 #ifndef H_DvG_SerialCommand
@@ -41,6 +41,8 @@ class DvG_SerialCommand {
   char    _strIn[STR_LEN];    // Incoming serial command string
   bool    _fTerminated;       // Incoming serial command is/got terminated?
   uint8_t _iPos;              // Index within _strIn to insert new char
+  const char* _empty = "\0";  // Reply when trying to retrieve command when not
+                              // yet terminated
 };
 
 /*------------------------------------------------------------------------------
