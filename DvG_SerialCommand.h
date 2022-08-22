@@ -5,8 +5,8 @@ character array) to store incoming characters received over the serial port,
 instead of using a memory hungry C++ string. Carriage return ('\r', ASCII 13)
 characters are ignored. Once a linefeed ('\n', ASCII 10) character is received,
 or whenever the incoming message length has exceeded the buffer of size
-STR_LEN (defined in DvG_SerialCommand.h), we speak of a received 'command'.
-It doesn't matter if the command is ASCII or binary encoded.
+BUFLEN_SERIALCOMMAND (defined in DvG_SerialCommand.h), we speak of a received
+'command'. It doesn't matter if the command is ASCII or binary encoded.
 
 'available()' should be called periodically to poll for incoming characters. It
 will return true when a new command is ready to be processed. Subsequently, the
@@ -21,8 +21,8 @@ Dennis van Gils, 22-08-2022
 #include <Arduino.h>
 
 // Buffer size for storing incoming characters. Includes the '\0' termination
-// character. Change buffer size to your needs up to a maximum of 255.
-#define STR_LEN 32
+// character. Change buffer size to your needs up to a maximum of 65535.
+const uint16_t BUFLEN_SERIALCOMMAND = 64;
 
 class DvG_SerialCommand {
 public:
@@ -37,10 +37,10 @@ public:
   char *getCmd();
 
 private:
-  Stream &_port;             // Serial port reference
-  char _strIn[STR_LEN];      // Incoming serial command string
+  Stream &_port;                     // Serial port reference
+  char _strIn[BUFLEN_SERIALCOMMAND]; // Incoming serial command string
   bool _fTerminated;         // Incoming serial command is/got terminated?
-  uint8_t _iPos;             // Index within _strIn to insert new char
+  uint16_t _iPos;            // Index within _strIn to insert new char
   const char *_empty = "\0"; // Reply when trying to retrieve command when not
                              // yet terminated
 };

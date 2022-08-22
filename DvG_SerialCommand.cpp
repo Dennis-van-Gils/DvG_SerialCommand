@@ -29,7 +29,7 @@ bool DvG_SerialCommand::available() {
         _strIn[_iPos] = '\0'; // Terminate string
         _fTerminated = true;
         break;
-      } else if (_iPos < STR_LEN - 1) {
+      } else if (_iPos < BUFLEN_SERIALCOMMAND - 1) {
         // Maximum length of incoming serial command is not yet reached. Append
         // characters to string.
         _port.read(); // Remove char from serial buffer
