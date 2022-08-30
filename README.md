@@ -1,3 +1,5 @@
+[DEPRECATED] Instead, use the improved library [DvG_StreamCommand](https://github.com/Dennis-van-Gils/DvG_StreamCommand).
+
 # Serial command listener
 
 This library allows listening to a serial port for incoming commands and act upon them. To keep the memory usage low, it uses a C-string (null-terminated character array) to store incoming characters received over the serial port, instead of using a memory hungry C++ string. Carriage return ('\r', ASCII 13) characters are ignored. Once a linefeed ('\n', ASCII 10) character is received, or whenever the incoming message length has exceeded the buffer of size BUFLEN_SERIALCOMMAND (defined in DvG_SerialCommand.h), we speak of a received 'command'. It doesn't matter if the command is ASCII or binary encoded.
